@@ -37,11 +37,7 @@ const ProcessedVideosList = () => {
 
   return (
     <Box bg="#0f0c29" color="white">
-      <Box
-        p={5}
-        color="white"
-        minHeight="100vh"
-      >
+      <Box p={5} color="white" minHeight="100vh">
         <Flex justify="flex-end" mb={10} gap={4}>
           <Button
             as={NavLink}
@@ -84,7 +80,12 @@ const ProcessedVideosList = () => {
             Processed Videos
           </Text>
         </Flex>
-        <Box overflowX="auto" m={2} bgGradient="linear(to-b, #0f0c29, #302b63)" borderRadius={15}>
+        <Box
+          overflowX="auto"
+          m={2}
+          bgGradient="linear(to-b, #0f0c29, #302b63)"
+          borderRadius={15}
+        >
           <Table variant="simple" colorScheme="whiteAlpha" width="100%">
             <Thead>
               <Tr>
@@ -105,8 +106,8 @@ const ProcessedVideosList = () => {
             <Tbody>
               {videos.map((video, index) => (
                 <Tr key={index}>
-                  <Td fontSize={{ base: 12, md: 14}}>{index + 1}</Td>
-                  <Td fontSize={{ base: 12, md: 14}}>
+                  <Td fontSize={{ base: 12, md: 14 }}>{index + 1}</Td>
+                  <Td fontSize={{ base: 12, md: 14 }}>
                     <Link
                       href={video.url}
                       target="_blank"
@@ -116,8 +117,12 @@ const ProcessedVideosList = () => {
                       {video.name}
                     </Link>
                   </Td>
-                  <Td fontSize={{ base: 12, md: 14}}>{video.metadata?.exercise_type}</Td>
-                  <Td fontSize={{ base: 12, md: 14}}>{video.metadata?.reps_count}</Td>
+                  <Td fontSize={{ base: 12, md: 14 }}>
+                    {video.metadata?.exercise_type}
+                  </Td>
+                  <Td fontSize={{ base: 12, md: 14 }}>
+                    {video.metadata?.reps_count}
+                  </Td>
                 </Tr>
               ))}
             </Tbody>
