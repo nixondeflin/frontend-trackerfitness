@@ -109,7 +109,6 @@ const Record = () => {
       navigate("/output", {
         state: { uploadResponse: response.data, filename },
       });
-
     } catch (error) {
       toast({
         title: "Error uploading video",

@@ -20,7 +20,10 @@ const OutputFile = () => {
   const { uploadResponse, filename } = location.state;
 
   const buttonSize = useBreakpointValue({ base: "sm", md: "md", lg: "md" });
-  const gridTemplateColumns = useBreakpointValue({ base: "1fr 1fr", md: "repeat(4, auto)" });
+  const gridTemplateColumns = useBreakpointValue({
+    base: "1fr 1fr",
+    md: "repeat(4, auto)",
+  });
   const gridGap = useBreakpointValue({ base: 2, md: 4 });
 
   return (
@@ -30,7 +33,12 @@ const OutputFile = () => {
       color="white"
       minHeight="100vh"
     >
-      <Grid templateColumns={gridTemplateColumns} gap={gridGap} mb={10} justifyContent="flex-end">
+      <Grid
+        templateColumns={gridTemplateColumns}
+        gap={gridGap}
+        mb={10}
+        justifyContent="flex-end"
+      >
         <GridItem>
           <Button
             as={NavLink}
@@ -109,7 +117,12 @@ const OutputFile = () => {
           height="auto"
         />
       </Box>
-      <VStack align="center" mt={6} width={{ base: "60%", md: "50%", lg: "35%" }} mx="auto">
+      <VStack
+        align="center"
+        mt={6}
+        width={{ base: "60%", md: "50%", lg: "35%" }}
+        mx="auto"
+      >
         <FormControl id="fileName" mb={2}>
           <FormLabel>File Name</FormLabel>
           <Input
@@ -120,7 +133,11 @@ const OutputFile = () => {
             readOnly
           />
         </FormControl>
-        <Flex direction={{ base: "column", md: "row" }} gap={{ base: 2, md: 5, lg: 6 }} width="100%">
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          gap={{ base: 2, md: 5, lg: 6 }}
+          width="100%"
+        >
           <FormControl id="exerciseTypeResponse" mb={2} flex="1">
             <FormLabel>Exercise Type</FormLabel>
             <Input
