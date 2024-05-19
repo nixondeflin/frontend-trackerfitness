@@ -1,10 +1,11 @@
-import './App.css';
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ChakraProvider, CSSReset, Box } from '@chakra-ui/react';
-import Home from './Home';
-import UploadVideo from './UploadVideo';
-import ProcessedVideosList from './ProcessedVideosList';
+import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ChakraProvider, CSSReset, Box } from "@chakra-ui/react";
+import Home from "./Home";
+import UploadVideo from "./UploadVideo";
+import ProcessedVideosList from "./ProcessedVideosList";
+import Record from "./Record";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/recordvideo" element={<Record />} />
             <Route path="/uploadvideo" element={<UploadVideo />} />
             <Route path="/processed-videos" element={<ProcessedVideosList />} />
           </Routes>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -11,15 +11,16 @@ import {
   useToast,
   Flex,
   VStack,
-} from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
-import loadingGif from './assets/loading.gif'; // Correct path to the GIF
+  Select,
+} from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
+import loadingGif from "./assets/loading.gif"; // Correct path to the GIF
 
 const UploadVideo = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [exerciseType, setExerciseType] = useState('');
+  const [exerciseType, setExerciseType] = useState("");
   const [uploadResponse, setUploadResponse] = useState(null);
-  const [error, setError] = useState('');
+  const [setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
@@ -35,9 +36,9 @@ const UploadVideo = () => {
     event.preventDefault();
     if (!selectedFile || !exerciseType) {
       toast({
-        title: 'Error',
-        description: 'Please select a file and exercise type.',
-        status: 'error',
+        title: "Error",
+        description: "Please select a file and exercise type.",
+        status: "error",
         duration: 5000,
         isClosable: true,
       });
@@ -47,61 +48,69 @@ const UploadVideo = () => {
     setIsLoading(true);
 
     const formData = new FormData();
-    formData.append('file', selectedFile);
-    formData.append('exercise_type', exerciseType);
+    formData.append("file", selectedFile);
+    formData.append("exercise_type", exerciseType);
 
     try {
-      const response = await axios.post('https://trackerfit-423405.as.r.appspot.com/analyze_exercise', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/analyze_exercise",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       setUploadResponse(response.data);
-      console.log('Upload successful, response:', response.data);
+      console.log("Upload successful, response:", response.data);
       toast({
-        title: 'Upload successful',
-        description: 'Your video has been uploaded and processed successfully!',
-        status: 'success',
+        title: "Upload successful",
+        description: "Your video has been uploaded and processed successfully!",
+        status: "success",
         duration: 5000,
         isClosable: true,
       });
     } catch (error) {
-      console.error('Error uploading video:', error);
+      console.error("Error uploading video:", error);
       if (error.response) {
-        console.error('Response data:', error.response.data);
-        console.error('Response status:', error.response.status);
-        console.error('Response headers:', error.response.headers);
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
         toast({
-          title: 'Error uploading video',
+          title: "Error uploading video",
           description: error.response.statusText,
-          status: 'error',
+          status: "error",
           duration: 5000,
           isClosable: true,
         });
       } else if (error.request) {
-        console.error('Request data:', error.request);
+        console.error("Request data:", error.request);
         toast({
-          title: 'Error uploading video',
-          description: 'No response received from server.',
-          status: 'error',
+          title: "Error uploading video",
+          description: "No response received from server.",
+          status: "error",
           duration: 5000,
           isClosable: true,
         });
       } else {
-        console.error('Error message:', error.message);
+        console.error("Error message:", error.message);
         toast({
-          title: 'Error uploading video',
+          title: "Error uploading video",
           description: error.message,
-          status: 'error',
+          status: "error",
           duration: 5000,
           isClosable: true,
         });
       }
-      setError('Error uploading video: ' + error.message);
+      setError("Error uploading video: " + error.message);
       setUploadResponse(null);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const getFormattedFilename = (name) => {
+    return name ? name.replace(/\.mp4$/, "") : "";
   };
 
   return (
@@ -112,7 +121,15 @@ const UploadVideo = () => {
       color="white"
     >
       <Flex justify="flex-start" mb={4}>
-        <Button as={NavLink} to="/" bgColor="#E94057" color="white" width="10rem" margin="4" _hover={{ bgColor: "#751B6C" }}>
+        <Button
+          as={NavLink}
+          to="/"
+          bgColor="#E94057"
+          color="white"
+          width="10rem"
+          margin="4"
+          _hover={{ bgColor: "#751B6C" }}
+        >
           Home
         </Button>
       </Flex>
@@ -124,27 +141,57 @@ const UploadVideo = () => {
           <VStack spacing={4} align="center">
             <FormControl id="file">
               <FormLabel>Video File</FormLabel>
-              <Input type="file" accept="video/*" onChange={handleFileChange} required />
+              <Input
+                type="file"
+                accept="video/*"
+                onChange={handleFileChange}
+                required
+                bg="white"
+                color="black"
+              />
             </FormControl>
             <FormControl id="exerciseType">
               <FormLabel>Exercise Type</FormLabel>
-              <Input
-                type="text"
-                value={exerciseType}
+              <Select
+                placeholder="Select exercise type"
                 onChange={handleExerciseTypeChange}
-                placeholder="Exercise Type"
+                value={exerciseType}
                 required
-              />
+                bg="white"
+                color="black"
+              >
+                <option value="pull-up">Pull-up</option>
+                <option value="push-up">Push-up</option>
+                <option value="sit-up">Sit-up</option>
+                <option value="squat">Squat</option>
+                <option value="walk">Walk</option>
+              </Select>
             </FormControl>
-            <Button type="submit" bgColor="#E94057" color="white" width="10rem" margin="4" _hover={{ bgColor: "#751B6C" }} isLoading={isLoading}>
+            <Button
+              type="submit"
+              bgColor="#E94057"
+              color="white"
+              width="10rem"
+              margin="4"
+              _hover={{ bgColor: "#751B6C" }}
+              isLoading={isLoading}
+            >
               Upload
             </Button>
           </VStack>
         </form>
         {isLoading && (
           <Flex direction="column" align="center" justify="center" mt={4}>
-            <Image src={loadingGif} alt="Loading..." boxSize="150px" width="200" height="200" />
-            <Text mt={2}><i>It may take a while, please wait :D</i></Text>
+            <Image
+              src={loadingGif}
+              alt="Loading..."
+              boxSize="150px"
+              width="200"
+              height="200"
+            />
+            <Text mt={2}>
+              <i>It may take a while, please wait :D</i>
+            </Text>
           </Flex>
         )}
       </Flex>
@@ -152,26 +199,59 @@ const UploadVideo = () => {
       {uploadResponse && (
         <Box mt={8} textAlign="center">
           <Text fontSize="xl" fontWeight="bold" mb={4}>
-            Output File 
+            Output File
           </Text>
-          <Image src={uploadResponse.output_file} alt="GIF" maxW="100%" mx="auto" />
+          <Image
+            src={uploadResponse.output_file}
+            alt="GIF"
+            maxW="100%"
+            mx="auto"
+          />
           <VStack spacing={4} align="center" mt={4}>
             <Flex direction="column" align="center" justify="center">
               <FormControl id="fileName">
                 <FormLabel>File Name</FormLabel>
-                <Input type="text" value={selectedFile?.name || ''} readOnly />
+                <Input
+                  type="text"
+                  mb={5}
+                  value={getFormattedFilename(selectedFile?.name) || ""}
+                  bg="white"
+                  color="black"
+                  readOnly
+                />
               </FormControl>
               <FormControl id="exerciseTypeResponse">
                 <FormLabel>Exercise Type</FormLabel>
-                <Input type="text" value={uploadResponse.exercise_type || ''} readOnly />
+                <Input
+                  type="text"
+                  mb={5}
+                  value={uploadResponse.exercise_type || ""}
+                  bg="white"
+                  color="black"
+                  readOnly
+                />
               </FormControl>
               <FormControl id="repsCount">
                 <FormLabel>Reps Count</FormLabel>
-                <Input type="text" value={uploadResponse.reps_count || ''} readOnly />
+                <Input
+                  type="text"
+                  mb={5}
+                  value={uploadResponse.reps_count || "0"}
+                  bg="white"
+                  color="black"
+                  readOnly
+                />
               </FormControl>
               <FormControl id="outputFile">
                 <FormLabel>Output File</FormLabel>
-                <Input type="text" value={uploadResponse.output_file || ''} readOnly />
+                <Input
+                  type="text"
+                  mb={5}
+                  value={uploadResponse.output_file || ""}
+                  bg="white"
+                  color="black"
+                  readOnly
+                />
               </FormControl>
             </Flex>
           </VStack>
