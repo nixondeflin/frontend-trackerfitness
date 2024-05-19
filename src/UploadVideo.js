@@ -75,7 +75,6 @@ const UploadVideo = () => {
       navigate("/output", {
         state: { uploadResponse: response.data, filename },
       });
-
     } catch (error) {
       console.error("Error uploading video:", error);
       if (error.response) {
