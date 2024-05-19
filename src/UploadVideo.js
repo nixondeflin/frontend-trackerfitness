@@ -12,17 +12,17 @@ import {
   Flex,
   VStack,
   Select,
+  useBreakpointValue,
 } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import loadingGif from "./assets/loading.gif"; // Correct path to the GIF
 
 const UploadVideo = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [exerciseType, setExerciseType] = useState("");
-  const [uploadResponse, setUploadResponse] = useState(null);
-  const [setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -61,7 +61,6 @@ const UploadVideo = () => {
           },
         }
       );
-      setUploadResponse(response.data);
       console.log("Upload successful, response:", response.data);
       toast({
         title: "Upload successful",
@@ -70,6 +69,13 @@ const UploadVideo = () => {
         duration: 5000,
         isClosable: true,
       });
+
+      const filename = getFormattedFilename(selectedFile.name);
+
+      navigate("/output", {
+        state: { uploadResponse: response.data, filename },
+      });
+
     } catch (error) {
       console.error("Error uploading video:", error);
       if (error.response) {
@@ -102,8 +108,6 @@ const UploadVideo = () => {
           isClosable: true,
         });
       }
-      setError("Error uploading video: " + error.message);
-      setUploadResponse(null);
     } finally {
       setIsLoading(false);
     }
@@ -113,33 +117,59 @@ const UploadVideo = () => {
     return name ? name.replace(/\.mp4$/, "") : "";
   };
 
+  const buttonSize = useBreakpointValue({ base: "sm", md: "md", lg: "md" });
+
   return (
     <Box
-      p={4}
-      height="200vh"
+      p={5}
       bgGradient="linear(to-b, #0f0c29, #302b63)"
       color="white"
+      minHeight="100vh"
     >
-      <Flex justify="flex-start" mb={4}>
+      <Flex justify="flex-end" mb={10} gap={4}>
         <Button
           as={NavLink}
           to="/"
           bgColor="#E94057"
           color="white"
-          width="10rem"
-          margin="4"
+          size={buttonSize}
           _hover={{ bgColor: "#751B6C" }}
         >
           Home
         </Button>
+        <Button
+          as={NavLink}
+          to="/recordvideo"
+          bgColor="#E94057"
+          color="white"
+          size={buttonSize}
+          _hover={{ bgColor: "#751B6C" }}
+        >
+          Record Video
+        </Button>
+        <Button
+          as={NavLink}
+          to="/processed-videos"
+          bgColor="#E94057"
+          color="white"
+          size={buttonSize}
+          _hover={{ bgColor: "#751B6C" }}
+        >
+          Processed Videos
+        </Button>
       </Flex>
       <Flex direction="column" align="center" justify="center">
-        <Text fontSize="2xl" fontWeight="bold" mb={4}>
+        <Text
+          fontSize={{ base: "xl", md: "2xl", lg: "2xl" }}
+          fontWeight="bold"
+          mb={6}
+          color="white"
+        >
           Upload Exercise Video
         </Text>
         <form onSubmit={handleSubmit}>
-          <VStack spacing={4} align="center">
-            <FormControl id="file">
+          <VStack spacing={4} align="center" mx="auto">
+            <FormControl id="file" width={{ base: "90%", md: "100%" }}>
               <FormLabel>Video File</FormLabel>
               <Input
                 type="file"
@@ -148,9 +178,11 @@ const UploadVideo = () => {
                 required
                 bg="white"
                 color="black"
+                alignContent="center"
+                disabled={isLoading}
               />
             </FormControl>
-            <FormControl id="exerciseType">
+            <FormControl id="exerciseType" width={{ base: "90%", md: "100%" }}>
               <FormLabel>Exercise Type</FormLabel>
               <Select
                 placeholder="Select exercise type"
@@ -159,6 +191,7 @@ const UploadVideo = () => {
                 required
                 bg="white"
                 color="black"
+                disabled={isLoading}
               >
                 <option value="pull-up">Pull-up</option>
                 <option value="push-up">Push-up</option>
@@ -171,10 +204,11 @@ const UploadVideo = () => {
               type="submit"
               bgColor="#E94057"
               color="white"
-              width="10rem"
+              width="50%"
               margin="4"
               _hover={{ bgColor: "#751B6C" }}
               isLoading={isLoading}
+              size={buttonSize}
             >
               Upload
             </Button>
@@ -195,68 +229,6 @@ const UploadVideo = () => {
           </Flex>
         )}
       </Flex>
-
-      {uploadResponse && (
-        <Box mt={8} textAlign="center">
-          <Text fontSize="xl" fontWeight="bold" mb={4}>
-            Output File
-          </Text>
-          <Image
-            src={uploadResponse.output_file}
-            alt="GIF"
-            maxW="100%"
-            mx="auto"
-          />
-          <VStack spacing={4} align="center" mt={4}>
-            <Flex direction="column" align="center" justify="center">
-              <FormControl id="fileName">
-                <FormLabel>File Name</FormLabel>
-                <Input
-                  type="text"
-                  mb={5}
-                  value={getFormattedFilename(selectedFile?.name) || ""}
-                  bg="white"
-                  color="black"
-                  readOnly
-                />
-              </FormControl>
-              <FormControl id="exerciseTypeResponse">
-                <FormLabel>Exercise Type</FormLabel>
-                <Input
-                  type="text"
-                  mb={5}
-                  value={uploadResponse.exercise_type || ""}
-                  bg="white"
-                  color="black"
-                  readOnly
-                />
-              </FormControl>
-              <FormControl id="repsCount">
-                <FormLabel>Reps Count</FormLabel>
-                <Input
-                  type="text"
-                  mb={5}
-                  value={uploadResponse.reps_count || "0"}
-                  bg="white"
-                  color="black"
-                  readOnly
-                />
-              </FormControl>
-              <FormControl id="outputFile">
-                <FormLabel>Output File</FormLabel>
-                <Input
-                  type="text"
-                  mb={5}
-                  value={uploadResponse.output_file || ""}
-                  bg="white"
-                  color="black"
-                  readOnly
-                />
-              </FormControl>
-            </Flex>
-          </VStack>
-        </Box>
-      )}
     </Box>
   );
 };

@@ -6,6 +6,7 @@ import Home from "./Home";
 import UploadVideo from "./UploadVideo";
 import ProcessedVideosList from "./ProcessedVideosList";
 import Record from "./Record";
+import OutputFile from "./OutputFile";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recordvideo" element={<Record />} />
+            <Route path="/output" element={<OutputFile />} />
             <Route path="/uploadvideo" element={<UploadVideo />} />
             <Route path="/processed-videos" element={<ProcessedVideosList />} />
           </Routes>

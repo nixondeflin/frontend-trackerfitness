@@ -12,15 +12,16 @@ import {
   Flex,
   VStack,
   Select,
+  useBreakpointValue,
+  Divider,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import loadingGif from "./assets/loading.gif";
 
 const Record = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [exerciseType, setExerciseType] = useState("");
-  const [uploadResponse, setUploadResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [recordedBlob, setRecordedBlob] = useState(null);
   const [previewStream, setPreviewStream] = useState(null);
@@ -28,6 +29,7 @@ const Record = () => {
   const streamRef = useRef(null);
   const toast = useToast();
   const [filename, setFilename] = useState("");
+  const navigate = useNavigate();
 
   const startVideo = () => {
     navigator.mediaDevices
@@ -96,7 +98,6 @@ const Record = () => {
           },
         }
       );
-      setUploadResponse(response.data);
       toast({
         title: "Upload successful",
         description: "Your video has been uploaded and processed successfully!",
@@ -104,6 +105,11 @@ const Record = () => {
         duration: 5000,
         isClosable: true,
       });
+
+      navigate("/output", {
+        state: { uploadResponse: response.data, filename },
+      });
+
     } catch (error) {
       toast({
         title: "Error uploading video",
@@ -123,28 +129,54 @@ const Record = () => {
     }
   }, [previewStream]);
 
+  const buttonSize = useBreakpointValue({ base: "sm", md: "md", lg: "md" });
+
   return (
     <Box
-      p={4}
-      height="200vh"
+      p={5}
       bgGradient="linear(to-b, #0f0c29, #302b63)"
       color="white"
+      minHeight="100vh"
     >
-      <Flex justify="flex-start" mb={4}>
+      <Flex justify="flex-end" mb={10} gap={4}>
         <Button
           as={NavLink}
           to="/"
           bgColor="#E94057"
           color="white"
-          width="10rem"
-          margin="4"
+          size={buttonSize}
           _hover={{ bgColor: "#751B6C" }}
         >
           Home
         </Button>
+        <Button
+          as={NavLink}
+          to="/uploadvideo"
+          bgColor="#E94057"
+          color="white"
+          size={buttonSize}
+          _hover={{ bgColor: "#751B6C" }}
+        >
+          Upload Video
+        </Button>
+        <Button
+          as={NavLink}
+          to="/processed-videos"
+          bgColor="#E94057"
+          color="white"
+          size={buttonSize}
+          _hover={{ bgColor: "#751B6C" }}
+        >
+          Processed Videos
+        </Button>
       </Flex>
       <Flex direction="column" align="center" justify="center">
-        <Text fontSize="2xl" fontWeight="bold" mb={4} color="white">
+        <Text
+          fontSize={{ base: "xl", md: "2xl", lg: "2xl" }}
+          fontWeight="bold"
+          mb={6}
+          color="white"
+        >
           Record Your Exercise Video
         </Text>
         <ReactMediaRecorder
@@ -152,33 +184,51 @@ const Record = () => {
           onStop={(blobUrl, blob) => setRecordedBlob(blob)}
           onRecordingStart={(stream) => setPreviewStream(stream)}
           render={({ startRecording, stopRecording, mediaBlobUrl }) => (
-            <div className="recorder-controls">
-              <div className="video-container">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Box
+                width={{ base: "60%", md: "80%", lg: "100%" }}
+                height="auto"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                backgroundColor="#000000"
+                borderRadius="10px"
+                overflow="hidden"
+              >
                 {!isRecording && mediaBlobUrl ? (
                   <video
                     src={mediaBlobUrl}
                     controls
                     style={{
                       width: "100%",
-                      maxWidth: "500px",
-                      borderRadius: "10px",
                     }}
                   />
                 ) : (
                   <video
-                    className="video-preview"
                     ref={videoPreviewRef}
                     autoPlay
                     muted
                     style={{
                       width: "100%",
-                      maxWidth: "500px",
-                      borderRadius: "10px",
                     }}
                   />
                 )}
-              </div>
-              <Flex justifyContent="center" mt={4}>
+              </Box>
+              <Flex
+                justifyContent="center"
+                mt={5}
+                wrap="wrap"
+                width={{ base: "60%", md: "80%", lg: "100%" }}
+                gap={{ base: 4, md: 6, lg: 6 }}
+                flexDirection="row"
+              >
                 <Button
                   onClick={() => {
                     if (!isRecording) {
@@ -187,18 +237,18 @@ const Record = () => {
                       startRecording();
                     }
                   }}
+                  width="46%"
                   disabled={isRecording}
-                  bgColor={isRecording ? "gray.500" : "#E94057"}
+                  bgColor={isRecording ? "gray.400" : "#E94057"}
                   color="white"
-                  width="10rem"
-                  margin="4"
+                  size={buttonSize}
                   _hover={
                     isRecording
-                      ? { bgColor: "gray.500" }
+                      ? { bgColor: "gray.400" }
                       : { bgColor: "#751B6C" }
                   }
                 >
-                  Start Recording
+                  Start Record
                 </Button>
                 <Button
                   onClick={() => {
@@ -208,66 +258,77 @@ const Record = () => {
                       stopRecording();
                     }
                   }}
+                  width="46%"
                   disabled={!isRecording}
-                  bgColor={!isRecording ? "gray.500" : "#E94057"}
+                  bgColor={!isRecording ? "gray.400" : "#E94057"}
                   color="white"
-                  width="10rem"
-                  margin="4"
+                  size={buttonSize}
                   _hover={
                     !isRecording
-                      ? { bgColor: "gray.500" }
+                      ? { bgColor: "gray.400" }
                       : { bgColor: "#751B6C" }
                   }
                 >
-                  Stop Recording
+                  Stop Record
                 </Button>
               </Flex>
-              {mediaBlobUrl && (
-                <form onSubmit={handleSubmit}>
-                  <VStack spacing={4} align="center" mt={4}>
-                    <Flex direction="row" gap={10} width="500px">
-                      <FormControl id="filename">
-                        <FormLabel>File Name</FormLabel>
-                        <Input
-                          placeholder="Enter filename"
-                          value={filename}
-                          onChange={handleFilenameChange}
-                          required
-                          bg="white"
-                          color="black"
-                        />
-                      </FormControl>
-                      <FormControl id="exerciseType">
-                        <FormLabel>Exercise Type</FormLabel>
-                        <Select
-                          placeholder="Select exercise type"
-                          onChange={handleExerciseChange}
-                          value={exerciseType}
-                          required
-                          bg="white"
-                          color="black"
-                        >
-                          <option value="pull-up">Pull-up</option>
-                          <option value="push-up">Push-up</option>
-                          <option value="sit-up">Sit-up</option>
-                          <option value="squat">Squat</option>
-                          <option value="walk">Walk</option>
-                        </Select>
-                      </FormControl>
-                    </Flex>
-                    <Button
-                      type="submit"
-                      bgColor="#E94057"
-                      color="white"
-                      width="500px"
-                      margin="4"
-                      _hover={{ bgColor: "#751B6C" }}
-                      isLoading={isLoading}
-                    >
-                      Upload
-                    </Button>
-                  </VStack>
-                </form>
+              {mediaBlobUrl && !isRecording && (
+                <Box width={{ base: "60%", md: "80%", lg: "100%" }}>
+                  <form onSubmit={handleSubmit}>
+                    <VStack spacing={4} align="center" mt={12} width="100%">
+                      <Divider />
+                      <Flex
+                        direction={{ base: "column", md: "row" }}
+                        gap={{ base: 4, md: 6, lg: 6 }}
+                        width="100%"
+                        mt={5}
+                      >
+                        <FormControl id="filename">
+                          <FormLabel>File Name</FormLabel>
+                          <Input
+                            placeholder="Enter filename"
+                            value={filename}
+                            onChange={handleFilenameChange}
+                            required
+                            bg="white"
+                            color="black"
+                            disabled={isLoading}
+                          />
+                        </FormControl>
+                        <FormControl id="exerciseType">
+                          <FormLabel>Exercise Type</FormLabel>
+                          <Select
+                            placeholder="Select exercise type"
+                            onChange={handleExerciseChange}
+                            value={exerciseType}
+                            required
+                            bg="white"
+                            color="black"
+                            disabled={isLoading}
+                          >
+                            <option value="pull-up">Pull-up</option>
+                            <option value="push-up">Push-up</option>
+                            <option value="sit-up">Sit-up</option>
+                            <option value="squat">Squat</option>
+                            <option value="walk">Walk</option>
+                          </Select>
+                        </FormControl>
+                      </Flex>
+                      <Button
+                        type="submit"
+                        bgColor="#E94057"
+                        color="white"
+                        width={{ base: "100%", md: "50%" }}
+                        margin="4"
+                        _hover={{ bgColor: "#751B6C" }}
+                        isLoading={isLoading}
+                        size={buttonSize}
+                      >
+                        Upload
+                      </Button>
+                    </VStack>
+                  </form>
+                </Box>
               )}
               {isLoading && (
                 <Flex direction="column" align="center" justify="center" mt={4}>
@@ -287,64 +348,6 @@ const Record = () => {
           )}
         />
       </Flex>
-
-      {uploadResponse && (
-        <Box mt={8} textAlign="center">
-          <Text fontSize="xl" fontWeight="bold" mb={4}>
-            Output File
-          </Text>
-          <Image
-            src={uploadResponse.output_file}
-            alt="GIF"
-            maxW="500px"
-            mx="auto"
-          />
-          <VStack spacing={4} align="center" mt={4}>
-            <Flex direction="column" align="center" justify="center">
-              <FormControl id="fileName" mb={5}>
-                <FormLabel>File Name</FormLabel>
-                <Input
-                  type="text"
-                  value={filename}
-                  bg="white"
-                  color="black"
-                  readOnly
-                />
-              </FormControl>
-              <FormControl id="exerciseTypeResponse" mb={5}>
-                <FormLabel>Exercise Type</FormLabel>
-                <Input
-                  type="text"
-                  value={uploadResponse.exercise_type}
-                  bg="white"
-                  color="black"
-                  readOnly
-                />
-              </FormControl>
-              <FormControl id="repsCount" mb={5}>
-                <FormLabel>Reps Count</FormLabel>
-                <Input
-                  type="text"
-                  value={uploadResponse.reps_count || "0"}
-                  bg="white"
-                  color="black"
-                  readOnly
-                />
-              </FormControl>
-              <FormControl id="outputFile" mb={5}>
-                <FormLabel>Output File</FormLabel>
-                <Input
-                  type="text"
-                  value={uploadResponse.output_file || ""}
-                  bg="white"
-                  color="black"
-                  readOnly
-                />
-              </FormControl>
-            </Flex>
-          </VStack>
-        </Box>
-      )}
     </Box>
   );
 };
