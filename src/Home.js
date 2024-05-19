@@ -24,19 +24,30 @@ const Home = () => {
             mb={4}
             p={4}
           >
-            AI Tracker Fitness Service
+            AI Motion Analyzer for Fitness Enthusiasts
           </Text>
-          <Text fontSize={{ base: "sm", md: "md", lg: "lg" }} mb={4}>
-            <i>
-              <b>AI Fitness Tracker</b>
-            </i>{" "}
-            adalah sebuah <i>service</i> untuk memantau dan menganalisis
-            aktivitas fisik pengguna,
+          <Text fontSize={{ base: "sm", md: "md", lg: "lg" }}>
+            <b>
+              Welcome to AI Motion Analyzer, the ultimate digital companion for
+              fitness enthusiasts!
+            </b>
             <br />
-            Dengan menggunggah data video, <i>AI Fitness Tracker</i> dapat
-            memberikan analisis jumlah repetisi yang pengguna lakukan untuk
-            membantu mencapai tujuan kebugaran mereka. Pengguna juga dapat
-            melihat lagi hasil video mereka di <i>Processed Video</i>.
+            AI Fitness Analyzer is a website designed to enhance your fitness
+            journey through the power of Artificial Intelligence (AI). Our
+            website offers innovative services to help you monitor, analyze, and
+            improve your physical activities, ensuring you to achieve your
+            fitness goals. With our intuitive video recording feature, you can
+            effortlessly capture your exercise sessions, whether you're
+            performing walk, squat, sit-up, pull-up, and even push-up. You can
+            also select and upload your exercise videos directly from your
+            device. Our advanced AI algorithms will analyze your exercise
+            videos, counting the number of accurate movements, to help you
+            refine your technique and maximize the effectiveness of your
+            workouts. Access your analyzed exercise videos with processed video
+            feature, which stores all your analyzed videos, so you can monitor
+            your progress. Let's start your fitness journey by recording and
+            analyzing your workouts! Take the first step towards achieving your
+            fitness goals with the support of our technology.
           </Text>
         </Box>
         <Flex
