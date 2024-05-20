@@ -90,7 +90,7 @@ const Record = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/analyze_exercise",
+        "https://trackerfit-423405.as.r.appspot.com/analyze_exercise",
         formData,
         {
           headers: {
