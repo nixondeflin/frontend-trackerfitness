@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Text, Flex, Box } from "@chakra-ui/react";
+import { Button, Text, Flex, Box, AspectRatio } from "@chakra-ui/react";
+import { SimpleGrid } from '@chakra-ui/react'
+import { Card, CardBody } from '@chakra-ui/react'
 import backgroundImage from "./assets/bgweb.png";
 
 const Home = () => {
@@ -14,7 +16,7 @@ const Home = () => {
       display="flex"
       p={10}
     >
-      <Flex direction="column" align="center" justifyContent="center">
+      <Flex direction="column" align="center" justifyContent="center" w="100%">
         <Box textAlign="center" mb={{ base: 8, md: 16 }} p={4}>
           <Text
             bgGradient="linear(to-l, #8A2387, #E94057, #F27121)"
@@ -55,40 +57,86 @@ const Home = () => {
           align="center"
           justify="center"
           gap={4}
+          mb={8}
         >
           <Button
+            as={NavLink}
+            to="/recordvideo"
+            exact
+            activeClassName="active"
             bgColor="#E94057"
             color="white"
             width={{ base: "80%", md: "12rem" }}
             margin="2"
             _hover={{ bgColor: "#751B6C" }}
           >
-            <NavLink to="/recordvideo" exact="true" activeClassName="active">
-              Record Video
-            </NavLink>
+            Record Video
           </Button>
           <Button
+            as={NavLink}
+            to="/uploadvideo"
+            exact
+            activeClassName="active"
             bgColor="#E94057"
             color="white"
             width={{ base: "80%", md: "12rem" }}
             margin="2"
             _hover={{ bgColor: "#751B6C" }}
           >
-            <NavLink to="/uploadvideo" exact="true" activeClassName="active">
-              Upload Video
-            </NavLink>
+            Upload Video
           </Button>
           <Button
+            as={NavLink}
+            to="/processed-videos"
+            activeClassName="active"
             bgColor="#E94057"
             color="white"
             width={{ base: "80%", md: "12rem" }}
             margin="2"
             _hover={{ bgColor: "#751B6C" }}
           >
-            <NavLink to="/processed-videos" activeClassName="active">
-              Processed Videos
-            </NavLink>
+            Processed Videos
           </Button>
+        </Flex>
+        <Flex direction={{ base: "column", md: "row" }} wrap="wrap" gap={6} justify="center">
+          <SimpleGrid columns={[3, null, 3]} spacing='40px'>
+            <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
+              <AspectRatio maxW='560px' ratio={2}>
+                <iframe
+                    title='naruto'
+                    src='https://www.youtube.com/embed/onaQ0v_J5uU?si=78HIg-eiiBg32Bke'
+                    allowFullScreen
+                  />
+                </AspectRatio>
+              <CardBody>
+                <Text>View a summary of all your customers over the last month.</Text>
+              </CardBody>
+            </Card>
+            <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
+                <AspectRatio maxW='560px' ratio={2}>
+                  <iframe
+                      title='naruto'
+                      src='https://www.youtube.com/embed/eGo4IYlbE5g?si=yC85C82ahKQNE4Mv'
+                      allowFullScreen
+                    />
+                </AspectRatio>  
+              <CardBody>
+                <Text>View a summary of all your customers over the last month.</Text>
+              </CardBody>
+            </Card>
+            <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
+              <AspectRatio maxW='560px' ratio={2}>
+              <iframe
+                  title='naruto'
+                  src='https://www.youtube.com/embed/IODxDxX7oi4?si=2JH4ZGHXtKWpmxNI0'
+                  allowFullScreen
+                />
+              </AspectRatio>  
+              <CardBody>
+                <Text fontSize={{ base: "sm", md: "md", lg: "md" }}>Video rekomendasi tentang tata cara melakukan push up yang benar </Text>
+              </CardBody>
+            </Card>
+          </SimpleGrid>
         </Flex>
       </Flex>
     </Box>
