@@ -26,7 +26,7 @@ const Home = () => {
           >
             AI Motion Analyzer for Fitness Enthusiasts
           </Text>
-          <Text fontSize={{ base: "sm", md: "md", lg: "lg" }}>
+          <Text fontSize={{ base: "sm", md: "md", lg: "lg" }} textAlign="justify">
             <b>
               Welcome to AI Motion Analyzer, the ultimate digital companion for
               fitness enthusiasts!
@@ -90,6 +90,42 @@ const Home = () => {
             </NavLink>
           </Button>
         </Flex>
+        <Text mt={4} fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" textAlign="center">
+          Gerakan 1
+        </Text>
+        <Box mt={4} display="flex" justifyContent="center" width="100%">
+          <Box maxW="560px" width="100%">
+            <iframe
+              title="naruto"
+              src="https://www.youtube.com/embed/QhBnZ6NPOY0"
+              allowFullScreen
+              style={{ width: "100%", height: "315px" }}
+            />
+          </Box>
+        </Box>
+        <Box mt={8} p={4} borderWidth="1px" borderRadius="lg" width="100%" maxWidth="560px" textAlign="center">
+          <Text fontSize={{ base: "md", md: "lg" }}>
+            Penjelasan Video
+          </Text>
+        </Box>
+        <Text mt={4} fontSize={{ base: "lg", md: "xl" }} fontWeight="bold" textAlign="center">
+          Gerakan 2
+        </Text>
+        <Box mt={4} display="flex" justifyContent="center" width="100%">
+          <Box maxW="560px" width="100%">
+            <iframe
+              title="naruto"
+              src="https://www.youtube.com/embed/QhBnZ6NPOY0"
+              allowFullScreen
+              style={{ width: "100%", height: "315px" }}
+            />
+          </Box>
+        </Box>
+        <Box mt={8} p={4} borderWidth="1px" borderRadius="lg" width="100%" maxWidth="560px" textAlign="center">
+          <Text fontSize={{ base: "md", md: "lg" }}>
+            Penjelasan Video
+          </Text>
+        </Box>
       </Flex>
     </Box>
   );
