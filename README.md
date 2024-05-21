@@ -1,7 +1,45 @@
-# Getting Started with Create React App
+<p align="center">
+    <h1 align="center">
+      <span style="color: white; font-weight: bold;">Cloud Based Video Motion Analysis with AI</span>
+    </h1>
+</p>
+<p align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+<table>
+    <tr>
+        <td colspan=4 align="center">Kelompok Dream</td>
+    </tr>
+    <tr>
+        <td>No.</td>
+        <td>Nama</td>
+        <td>NIM</td>
+        <td>Email</td>
+    </tr>
+    <tr>
+        <td>1.</td>
+        <td>Jessica</td>
+        <td>18221073</td>
+        <td><a href="mailto:18221073@std.stei.itb.ac.id">18221073@std.stei.itb.ac.id</a></td>
+    </tr>
+    <tr>
+        <td>2.</td>
+        <td>Nadine Aliya Putri</td>
+        <td>18221081</td>
+        <td><a href="mailto:18221081@std.stei.itb.ac.id">18221081@std.stei.itb.ac.id</a></td>
+    </tr>
+    <tr>
+        <td>3.</td>
+        <td>Nixon Deflin Kurniawan</td>
+        <td>18221150</td>
+        <td><a href="mailto:18221150@std.stei.itb.ac.id">18221150@std.stei.itb.ac.id</a></td>
+    </tr>
+    <tr>
+        <td>5.</td>
+        <td>Victoria Angelique</td>
+        <td>18221153</td>
+        <td><a href="mailto:18221153@std.stei.itb.ac.id">18221153@std.stei.itb.ac.id</a></td>
+    </tr>
+</table>
 ## Available Scripts
 
 In the project directory, you can run:
