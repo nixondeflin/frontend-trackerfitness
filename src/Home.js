@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Text, Flex, Box, AspectRatio } from "@chakra-ui/react";
-import { SimpleGrid } from '@chakra-ui/react'
-import { Card, CardBody } from '@chakra-ui/react'
+import { SimpleGrid } from "@chakra-ui/react";
+import { Card, CardBody } from "@chakra-ui/react";
 import backgroundImage from "./assets/bgweb.png";
 
 const Home = () => {
@@ -17,14 +17,14 @@ const Home = () => {
       p={10}
     >
       <Flex direction="column" align="center" justifyContent="center" w="100%">
-        <Box textAlign="center" mb={{ base: 8, md: 16 }} p={4}>
+        <Box textAlign="justify" mb={{ base: 2, md: 6 }} p={4}>
           <Text
             bgGradient="linear(to-l, #8A2387, #E94057, #F27121)"
             bgClip="text"
             fontSize={{ base: "3xl", md: "5xl", lg: "6xl" }}
             fontWeight="extrabold"
             mb={4}
-            p={4}
+            p={1}
           >
             AI Motion Analyzer for Fitness Enthusiasts
           </Text>
@@ -53,11 +53,11 @@ const Home = () => {
           </Text>
         </Box>
         <Flex
-          direction={{ base: "column", lg: "row" }}
+          direction={{ base: "column", md: "row" }}
           align="center"
           justify="center"
           gap={4}
-          mb={8}
+          mb={16}
         >
           <Button
             as={NavLink}
@@ -98,80 +98,81 @@ const Home = () => {
             Processed Videos
           </Button>
         </Flex>
-        <Text fontSize={{ base: "2xl", md: "3xl", lg: "3xl" }} fontWeight="bold" mb={12}>
-          Video Tutorial Gerakan Olahraga
+        <Text fontSize={{ base: "xl", md: "3xl", lg: "3xl" }} fontWeight="bold" mb={12}>
+          Exercise Tutorial Recommendation
         </Text>   
-        <Flex direction={{ base: "column", md: "row" }} wrap="wrap" gap={6} justify="center">
-          <SimpleGrid columns={[3, null, 3]} spacing='40px'>
-            <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
-              <AspectRatio maxW='560px' ratio={2}>
-                <iframe
-                    title='naruto'
-                    src='https://www.youtube.com/embed/onaQ0v_J5uU?si=78HIg-eiiBg32Bke'
-                    allowFullScreen
-                  />
-                </AspectRatio>
-              <CardBody>
-                <Text>View a summary of all your customers over the last month.</Text>
-                <Text fontSize={{base: "sm", md: "md", lg: "lg" }}> Source : Calisthenicmovement</Text>
-              </CardBody>
-            </Card>
-            <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
-                <AspectRatio maxW='560px' ratio={2}>
-                  <iframe
-                      title='naruto'
-                      src='https://www.youtube.com/embed/eGo4IYlbE5g?si=yC85C82ahKQNE4Mv'
-                      allowFullScreen
-                    />
-                </AspectRatio>  
-              <CardBody>
-                <Text>View a summary of all your customers over the last month.</Text>
-              </CardBody>
-            </Card>
-            <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
-              <AspectRatio maxW='560px' ratio={2}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} mb={28} px={4} gap={16} justify="center">
+          <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="0 0 18px 5px rgba(255, 255, 255, 0.3)" p={4}>
+            <AspectRatio maxW="560px" ratio={2}>
               <iframe
-                  title='naruto'
-                  src='https://www.youtube.com/embed/IODxDxX7oi4?si=2JH4ZGHXtKWpmxNI0'
-                  allowFullScreen
-                />
-              </AspectRatio>  
-              <CardBody>
-                <Text fontSize={{ base: "sm", md: "md", lg: "md" }}>Video rekomendasi tentang tata cara melakukan push up yang benar </Text>
-              </CardBody>
-            </Card>
-          </SimpleGrid>
-          <Box mt={8}> {/* Adjust the mt value as needed to push the Flex component lower */}
-          <Flex direction={{ base: "column", md: "row" }} wrap="wrap" gap={6} justify="center">
-            <SimpleGrid columns={[2, null, 2]} spacing='40px'>
-              <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
-                <AspectRatio maxW='560px' ratio={2}>
-                  <iframe
-                      title='naruto'
-                      src='https://www.youtube.com/embed/mlqk1niuiZs?si=RQJdsMtfwnbS5db-'
-                      allowFullScreen
-                    />
-                </AspectRatio>
-                <CardBody>
-                  <Text>Video cara melakukan jalan dengan benar</Text>
-                </CardBody>
-              </Card>
-              <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
-                <AspectRatio maxW='560px' ratio={2}> 
-                  <iframe
-                      title='naruto'
-                      src='https://www.youtube.com/embed/IB_icWRzi4E?si=JR9t0T0oU6U60Xrq'
-                      allowFullScreen
-                    />
-                </AspectRatio>  
-                <CardBody>
-                  <Text>Video cara melakukan squat dengan benar</Text>
-                </CardBody>
-              </Card>
-            </SimpleGrid>
-          </Flex>
+                title="sit-up"
+                src="https://www.youtube.com/embed/onaQ0v_J5uU?si=78HIg-eiiBg32Bke"
+                allowFullScreen
+              />
+            </AspectRatio>
+            <CardBody>
+            {/* Source : Calisthenicmovement */}
+              <Text fontSize={{ base: "sm", md: "md", lg: "md" }} mb = {4}>Here's a tutorial video on how to perform a proper sit-up</Text>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md"}} fontStyle="italic">Source : Nuffield Health</Text>
+            </CardBody>
+          </Card>
+          <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="0 0 18px 5px rgba(255, 255, 255, 0.3)" p={4}>
+            <AspectRatio maxW="560px" ratio={2}>
+              <iframe
+                title="push-up-1"
+                src="https://www.youtube.com/embed/eGo4IYlbE5g?si=yC85C82ahKQNE4Mv"
+                allowFullScreen
+              />
+            </AspectRatio>
+            <CardBody>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md" }} mb = {4}>Here's a tutorial video on how to perform a proper pull-up</Text>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md"}} fontStyle="italic">Source : Calisthenicmovement</Text>
+            </CardBody>
+          </Card>
+          <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="0 0 18px 5px rgba(255, 255, 255, 0.3)" p={4}>
+            <AspectRatio maxW="560px" ratio={2}>
+              <iframe
+                title="push-up-2"
+                src="https://www.youtube.com/embed/IODxDxX7oi4?si=2JH4ZGHXtKWpmxNI0"
+                allowFullScreen
+              />
+            </AspectRatio>
+            <CardBody>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md" }} mb = {4}>Here's a tutorial video on how to perform a proper push-up</Text>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md"}} fontStyle="italic">Source : Calisthenicmovement</Text>
+            </CardBody>
+          </Card>
+          <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="0 0 18px 5px rgba(255, 255, 255, 0.3)" p={4}>
+            <AspectRatio maxW="560px" ratio={2}>
+              <iframe
+                title="walk"
+                src="https://www.youtube.com/embed/mlqk1niuiZs?si=RQJdsMtfwnbS5db-"
+                allowFullScreen
+              />
+            </AspectRatio>
+            <CardBody>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md" }} mb = {4}>Here's a tutorial video on how to perform a proper walk</Text>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md"}} fontStyle="italic">Source : The Guardian</Text>
+            </CardBody>
+          </Card>
+          <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="0 0 18px 5px rgba(255, 255, 255, 0.3)" p={4}>
+            <AspectRatio maxW="560px" ratio={2}>
+              <iframe
+                title="squat"
+                src="https://www.youtube.com/embed/IB_icWRzi4E?si=JR9t0T0oU6U60Xrq"
+                allowFullScreen
+              />
+            </AspectRatio>
+            <CardBody>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md" }} mb = {4}>Here's a tutorial video on how to perform a proper squat</Text>
+              <Text fontSize={{ base: "sm", md: "md", lg: "md"}} fontStyle="italic">Source : Insider Tech</Text>
+            </CardBody>
+          </Card>
+        </SimpleGrid>
+        <Box as="footer" py={4} textAlign="center" bg="rgba(0, 0, 0, 0)" color="white">
+          <Text fontSize="md" mb = {4}>&copy; 2024 AI Motion Analyzer. All rights reserved.</Text>
+          <Text fontSize="md" > Nixon Deflin K | Jessica | Nadine Aliya Putri | Victoria Angelique </Text>
         </Box>
-        </Flex>
       </Flex>
     </Box>
   );
