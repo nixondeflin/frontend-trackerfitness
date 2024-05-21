@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Text, Flex, Box, AspectRatio } from "@chakra-ui/react";
-import { SimpleGrid } from '@chakra-ui/react';
-import { Card, CardBody } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react'
+import { Card, CardBody } from '@chakra-ui/react'
 import backgroundImage from "./assets/bgweb.png";
 
 const Home = () => {
@@ -98,12 +98,9 @@ const Home = () => {
             Processed Videos
           </Button>
         </Flex>
-        
-        {/* Add Video tutorial text */}
         <Text fontSize={{ base: "2xl", md: "3xl", lg: "3xl" }} fontWeight="bold" mb={12}>
           Video Tutorial Gerakan Olahraga
-        </Text>
-        
+        </Text>   
         <Flex direction={{ base: "column", md: "row" }} wrap="wrap" gap={6} justify="center">
           <SimpleGrid columns={[3, null, 3]} spacing='40px'>
             <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
@@ -116,6 +113,7 @@ const Home = () => {
                 </AspectRatio>
               <CardBody>
                 <Text>View a summary of all your customers over the last month.</Text>
+                <Text fontSize={{base: "sm", md: "md", lg: "lg" }}> Source : Calisthenicmovement</Text>
               </CardBody>
             </Card>
             <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
@@ -143,8 +141,7 @@ const Home = () => {
               </CardBody>
             </Card>
           </SimpleGrid>
-        </Flex>
-        <Box mt={8}> {/* Adjust the mt value as needed to push the Flex component lower */}
+          <Box mt={8}> {/* Adjust the mt value as needed to push the Flex component lower */}
           <Flex direction={{ base: "column", md: "row" }} wrap="wrap" gap={6} justify="center">
             <SimpleGrid columns={[2, null, 2]} spacing='40px'>
               <Card bg="rgba(255, 255, 255, 0.05)" color="white" borderRadius="md" overflow="hidden" boxShadow="md" p={4}>
@@ -174,6 +171,7 @@ const Home = () => {
             </SimpleGrid>
           </Flex>
         </Box>
+        </Flex>
       </Flex>
     </Box>
   );
